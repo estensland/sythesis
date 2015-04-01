@@ -1,12 +1,21 @@
 Sythesis = {
+  route_to_objects : function(jsObject, keys, params) {
+    if (keys.length > 0){
+      return Sythesis.route_to_objects(jsObject[keys.shift()], keys, params);
+    }
+    else{
+      return jsObject(params);
+    }
+  },
+
   process: function(key, params){
     if (key){
-      var splited = key.split(':');
-      var namespace = splited[0];
-      var remainingKey = splited.slice(1,splited.length);
-      Sythesis.controller[namespace](remainingKey,params);
+      var multipleKeys = key.split('-');
+      for(var i = 0, ii = multipleKeys.length; i < ii, i ++){
+        Sythesis.route_to_objects(Sythesis.controller, multipleKeys[i].split(':'), params);
+      }
     }
-    },
+  },
 
   bind: function(){
     var onClassess = [['click', '.syth-link'], ['switch-change', '.syth-switch'], ['change' '.syth-select'], ['input', '.syth-type-input']]
