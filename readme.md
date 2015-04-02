@@ -8,4 +8,6 @@ The 'sythKey' attribute directs where it is routed. The key is passed in like so
 
 So 'validity:required' will call Sythesis.controller.validity.required()
 
+To pass multiple sets of keys, divide them with a '-', such as 'validity:required-validity:unique'
+
 This is mainly an experiment, hopefully one day being worthy of use.
