@@ -5,11 +5,17 @@ Sythesis.controller.validity = {
       $(input).val($(input).val().replace(/\*/g, ''))
     }
 
+    var length = 6;
+
+    if(input.getAttribute('sythPasswordLength') != null){
+      var length = parseInt(input.getAttribute('sythPasswordLength'));
+    }
+
     if(input.value == 'CREATE FOR ME'){
       ValidityController.markInert($(input))
     }
     else if(input.value.length < 6){
-      ValidityController.markInvalid($(input), 'password-syth-length-warning', 'Must Be 6 Characters Long');
+      ValidityController.markInvalid($(input), 'password-syth-length-warning', 'Must Be ' + length + ' Characters Long');
     }
     else {
       ValidityController.markValid($(input), 'password-syth-length-warning');
